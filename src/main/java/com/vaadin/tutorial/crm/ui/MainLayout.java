@@ -7,12 +7,7 @@ import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.HighlightConditions;
-import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
-import com.vaadin.tutorial.crm.ui.view.dashboard.DashboardView;
-import com.vaadin.tutorial.crm.ui.view.list.ListView;
 
 @CssImport("./styles/shared-styles.css")
 @PWA(name = "VaadinCRM",
@@ -23,7 +18,6 @@ import com.vaadin.tutorial.crm.ui.view.list.ListView;
 public class MainLayout extends AppLayout {
     public MainLayout() {
         createHeader();
-        createDrawer();
     }
 
     private void createHeader() {
@@ -41,15 +35,7 @@ public class MainLayout extends AppLayout {
         addToNavbar(header);
     }
 
-    private void createDrawer() {
-        RouterLink listLink = new RouterLink("List", ListView.class);
-        listLink.setHighlightCondition(HighlightConditions.sameLocation());
 
-        addToDrawer(new VerticalLayout(
-                listLink,
-                new RouterLink("Dashboard", DashboardView.class)
-        ));
-    }
 
 
 }

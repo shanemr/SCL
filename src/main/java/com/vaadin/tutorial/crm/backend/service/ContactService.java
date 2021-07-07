@@ -1,11 +1,8 @@
 package com.vaadin.tutorial.crm.backend.service;
 
-import com.vaadin.tutorial.crm.backend.entity.Company;
 import com.vaadin.tutorial.crm.backend.entity.Patient;
-import com.vaadin.tutorial.crm.backend.repository.CompanyRepository;
 import com.vaadin.tutorial.crm.backend.repository.ContactRepository;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Random;
@@ -18,12 +15,10 @@ import java.util.stream.Stream;
 public class ContactService {
     private static final Logger LOGGER = Logger.getLogger(ContactService.class.getName());
     private ContactRepository contactRepository;
-    private CompanyRepository companyRepository;
 
-    public ContactService(ContactRepository contactRepository,
-                          CompanyRepository companyRepository) {
+    public ContactService(ContactRepository contactRepository
+                          ) {
         this.contactRepository = contactRepository;
-        this.companyRepository = companyRepository;
     }
 
     public List<Patient> findAll() {
@@ -56,16 +51,9 @@ public class ContactService {
     }
     @PostConstruct
     public void populateTestData() {
-        if (companyRepository.count() == 0) {
-            companyRepository.saveAll(
-                    Stream.of("Path-Way Electronics", "E-Tech Management", "Path-E-Tech Management")
-                            .map(Company::new)
-                            .collect(Collectors.toList()));
-        }
 
         if (contactRepository.count() == 0) {
             Random r = new Random(0);
-            List<Company> companies = companyRepository.findAll();
             contactRepository.saveAll(
                     Stream.of("Gabrielle Patel", "Brian Robinson", "Eduardo Haugen",
                             "Koen Johansen", "Alejandro Macdonald", "Angel Karlsson", "Yahir Gustavsson", "Haiden Svensson",
@@ -79,9 +67,8 @@ public class ContactService {
                                 Patient patient = new Patient();
                                 patient.setFirstName(split[0]);
                                 patient.setLastName(split[1]);
-                                patient.setCompany(companies.get(r.nextInt(companies.size())));
                                 patient.setStatus(Patient.Status.values()[r.nextInt(Patient.Status.values().length)]);
-                                String email = (patient.getFirstName() + "." + patient.getLastName() + "@" + patient.getCompany().getName().replaceAll("[\\s-]", "") + ".com").toLowerCase();
+                                String email = (patient.getFirstName() + "." + patient.getLastName() + "@" + "something" + ".com").toLowerCase();
                                 patient.setEmail(email);
                                 return patient;
                             }).collect(Collectors.toList()));

@@ -9,9 +9,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.tutorial.crm.backend.entity.Company;
 import com.vaadin.tutorial.crm.backend.entity.Patient;
-import com.vaadin.tutorial.crm.backend.service.CompanyService;
 import com.vaadin.tutorial.crm.backend.service.ContactService;
 import com.vaadin.tutorial.crm.ui.MainLayout;
 
@@ -25,13 +23,13 @@ public class ListView extends VerticalLayout {
     private ContactForm form;
 
 
-    public ListView(ContactService contactService, CompanyService companyService) {
+    public ListView(ContactService contactService) {
         this.contactService = contactService;
         addClassName("list-view");
         setSizeFull();
         configureGrid();
 
-        form = new ContactForm(companyService.findAll());
+        form = new ContactForm();
         form.addListener(ContactForm.SaveEvent.class, this::saveContact);
         form.addListener(ContactForm.DeleteEvent.class, this::deleteContact);
         form.addListener(ContactForm.CloseEvent.class, e -> closeEditor());
@@ -49,12 +47,8 @@ public class ListView extends VerticalLayout {
     private void configureGrid() {
         grid.addClassName("contact-grid");
         grid.setSizeFull();
-        grid.removeColumnByKey("company");
+
         grid.setColumns("firstName", "lastName", "email", "status");
-        grid.addColumn(contact -> {
-            Company company = contact.getCompany();
-            return company == null ? "-" : company.getName();
-        }).setHeader("Company");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(event ->

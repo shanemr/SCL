@@ -20,9 +20,6 @@ public class Patient extends AbstractEntity implements Cloneable {
     @NotEmpty
     private String lastName = "";
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    private Company company;
 
     // Mapping userAnswers to Patient.
     @ManyToOne
@@ -74,13 +71,6 @@ public class Patient extends AbstractEntity implements Cloneable {
         this.firstName = firstName;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
 
 
 

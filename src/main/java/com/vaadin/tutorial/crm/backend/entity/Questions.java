@@ -14,7 +14,6 @@ public class Questions extends AbstractEntity implements Cloneable{
 
     // Map possible question answers to question.
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
-    @JoinColumn(name = "questionnaireAnswer_id")
     private List<QuestionAnswers> questionAnswers = new LinkedList<>();
 
     public Questionnaire getQuestionnaire() {
