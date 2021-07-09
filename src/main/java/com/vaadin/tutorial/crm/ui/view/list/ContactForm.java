@@ -24,8 +24,6 @@ public class ContactForm extends FormLayout {
   TextField lastName = new TextField("Last name");
   EmailField email = new EmailField("Email");
   ComboBox<Patient.Status> status = new ComboBox<>("Status");
-  //ComboBox<Company> company = new ComboBox<>("Company");
-  // Creating binding object and defining type of object to bind to.
   Binder<Patient> binder = new BeanValidationBinder<>(Patient.class);
 
 
@@ -36,11 +34,10 @@ public class ContactForm extends FormLayout {
 
   public ContactForm() {
     addClassName("contact-form");
+
     // Matches fields in contact with contact form.
     binder.bindInstanceFields(this);
 
-    //company.setItems(companies);
-    //company.setItemLabelGenerator(Company::getName);
     status.setItems(Patient.Status.values());
     addClassName("contact-form");
     add(firstName,

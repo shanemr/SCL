@@ -42,3 +42,15 @@ a[highlight] {
   font-size: 4em;
   margin: 1em 0;
 }
+
+/* Survey view */
+
+ .survey_layout, .survey_btn_layout{
+    align-self: center;
+
+ }
+
+ .survey_grid{
+    align-items: center;
+    width: 50%;
+ }

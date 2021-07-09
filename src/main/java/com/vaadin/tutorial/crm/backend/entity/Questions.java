@@ -14,7 +14,7 @@ public class Questions extends AbstractEntity implements Cloneable{
 
     // Map possible question answers to question.
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
-    private List<QuestionAnswers> questionAnswers = new LinkedList<>();
+    private List<Answers> answers = new LinkedList<>();
 
     public Questionnaire getQuestionnaire() {
         return questionnaire;
@@ -24,11 +24,11 @@ public class Questions extends AbstractEntity implements Cloneable{
         this.questionnaire = questionnaire;
     }
 
-    public List<QuestionAnswers> getQuestionnaireAnswers() {
-        return questionAnswers;
+    public List<Answers> getQuestionnaireAnswers() {
+        return answers;
     }
 
-    public void setQuestionnaireAnswers(List<QuestionAnswers> questionAnswers) {
-        this.questionAnswers = questionAnswers;
+    public void setQuestionnaireAnswers(List<Answers> answers) {
+        this.answers = answers;
     }
 }

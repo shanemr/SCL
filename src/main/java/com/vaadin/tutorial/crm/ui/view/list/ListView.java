@@ -14,7 +14,7 @@ import com.vaadin.tutorial.crm.backend.service.ContactService;
 import com.vaadin.tutorial.crm.ui.MainLayout;
 
 @Route(value = "", layout = MainLayout.class)
-@PageTitle("Contacts | Vaadin CRM")
+@PageTitle("Patients | QEEG")
 public class ListView extends VerticalLayout {
 
     private ContactService contactService;
