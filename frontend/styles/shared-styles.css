@@ -43,6 +43,13 @@ a[highlight] {
   margin: 1em 0;
 }
 
+
+/* SCL Survey view */
+
+.scl_layout {
+  alignment: center;
+}
+
 /* Survey view */
 
  .survey_layout, .survey_btn_layout{

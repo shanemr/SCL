@@ -1,8 +1,8 @@
 package com.vaadin.tutorial.crm.backend.service;
 
-import com.vaadin.tutorial.crm.backend.entity.Patient;
-import com.vaadin.tutorial.crm.backend.repository.ContactRepository;
-import org.springframework.stereotype.Service;
+import com.vaadin.tutorial.crm.backend.entity.Questions;
+import com.vaadin.tutorial.crm.backend.repository.QuestionsRepository;
+
 import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Random;
@@ -11,51 +11,51 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Service
-public class ContactService {
+public class QuestionService {
     private static final Logger LOGGER = Logger.getLogger(ContactService.class.getName());
-    private ContactRepository contactRepository;
+    private QuestionsRepository questionsRepository;
 
-    public ContactService(ContactRepository contactRepository) {
-        this.contactRepository = contactRepository;
+    public QuestionService(QuestionsRepository questionsRepository) {
+        this.questionsRepository = questionsRepository;
     }
 
-    public List<Patient> findAll() {
-        return contactRepository.findAll();
+    public List<Questions> findAll() {
+        return questionsRepository.findAll();
     }
 
-    public List<Patient> findAll(String stringFilter) {
+    public List<Questions> findAll(String stringFilter) {
 
 
         if (stringFilter == null || stringFilter.isEmpty()) {
-            return contactRepository.findAll();
+            return questionsRepository.findAll();
         } else {
-            return contactRepository.search(stringFilter);
+            return questionsRepository.search(stringFilter);
         }
     }
 
     public long count() {
-        return contactRepository.count();
+        return questionsRepository.count();
     }
 
-    public void delete(Patient patient) {
-        contactRepository.delete(patient);
+    public void delete(Questions question) {
+        questionsRepository.delete(question);
     }
 
-    public void save(Patient patient) {
-        if (patient == null) {
+    public void save(Questions question) {
+        if (question == null) {
             LOGGER.log(Level.SEVERE,
                     "Contact is null. Are you sure you have connected your form to the application?");
             return;
         }
-        contactRepository.save(patient);
+        questionsRepository.save(question);
     }
+
     @PostConstruct
     public void populateTestData() {
 
-        if (contactRepository.count() == 0) {
+        if (questionsRepository.count() == 0) {
             Random r = new Random(0);
-            contactRepository.saveAll(
+            questionsRepository.saveAll(
                     Stream.of("Gabrielle Patel", "Brian Robinson", "Eduardo Haugen",
                             "Koen Johansen", "Alejandro Macdonald", "Angel Karlsson", "Yahir Gustavsson", "Haiden Svensson",
                             "Emily Stewart", "Corinne Davis", "Ryann Davis", "Yurem Jackson", "Kelly Gustavsson",
@@ -65,13 +65,9 @@ public class ContactService {
                             "Jaydan Jackson", "Bernard Nilsen")
                             .map(name -> {
                                 String[] split = name.split(" ");
-                                Patient patient = new Patient();
-                                patient.setFirstName(split[0]);
-                                patient.setLastName(split[1]);
-                                patient.setStatus(Patient.Status.values()[r.nextInt(Patient.Status.values().length)]);
-                                String email = (patient.getFirstName() + "." + patient.getLastName() + "@" + "something" + ".com").toLowerCase();
-                                patient.setEmail(email);
-                                return patient;
+                                Questions question = new Questions();
+                                question.setQuestion(split[0]);
+                                return question;
                             }).collect(Collectors.toList()));
         }
     }

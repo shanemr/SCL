@@ -7,6 +7,10 @@ import java.util.List;
 @Entity
 public class Questions extends AbstractEntity implements Cloneable{
 
+    private String question = "";
+
+
+
     // Maps questions to questionnaire.
     @ManyToOne
     @JoinColumn(name = "questionnaire_id")
@@ -30,5 +34,13 @@ public class Questions extends AbstractEntity implements Cloneable{
 
     public void setQuestionnaireAnswers(List<Answers> answers) {
         this.answers = answers;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
     }
 }

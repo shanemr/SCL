@@ -1,18 +1,13 @@
 package com.vaadin.tutorial.crm.ui.view.list;
 
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import com.vaadin.tutorial.crm.backend.entity.Answers;
-import com.vaadin.tutorial.crm.backend.entity.Patient;
 import com.vaadin.tutorial.crm.backend.service.AnswerService;
-import com.vaadin.tutorial.crm.backend.service.ContactService;
-import com.vaadin.tutorial.crm.ui.UserSurveyView;
+import com.vaadin.tutorial.crm.ui.view.user.UserSurveyView;
 
 @Route(value = "test", layout = UserSurveyView.class)
 public class TestView extends VerticalLayout {

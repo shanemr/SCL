@@ -11,10 +11,10 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.tutorial.crm.backend.entity.Patient;
 import com.vaadin.tutorial.crm.backend.service.ContactService;
-import com.vaadin.tutorial.crm.ui.MainLayout;
+import com.vaadin.tutorial.crm.ui.view.adim.MainLayout;
 
 @Route(value = "", layout = MainLayout.class)
-@PageTitle("Patients | QEEG")
+@PageTitle("Contacts | Vaadin CRM")
 public class ListView extends VerticalLayout {
 
     private ContactService contactService;

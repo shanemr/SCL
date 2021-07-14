@@ -27,6 +27,8 @@ public class AnswerService  {
 
 
     public List<String> getAnswers(AnswerService answerService){
+        // Clearing list of previous answers
+        list.clear();
         for( int i = 0; i < answerService.count(); i++) {
             list.add(answerService.findAll().get(i).getAnswer());
         }

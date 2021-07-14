@@ -1,22 +1,27 @@
-package com.vaadin.tutorial.crm.ui;
+package com.vaadin.tutorial.crm.ui.view.adim;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.server.PWA;
 
-public class UserSurveyView extends AppLayout {
-    // Constructor
-    public UserSurveyView() {
-
+@CssImport("./styles/shared-styles.css")
+@PWA(name = "VaadinCRM",
+        shortName = "CRM",
+        offlineResources = {
+        "C:\\Users\\sray\\Documents\\vaadin-crm\\src\\main\\webapp\\styles",
+                "./images/offline.png"})
+public class MainLayout extends AppLayout {
+    public MainLayout() {
         createHeader();
     }
 
-    // Creating header fo layout
     private void createHeader() {
-        H1 logo = new H1("Symptom Check List");
+        H1 logo = new H1("Patient SCL Tracker");
         logo.addClassName("logo");
 
         Anchor logout = new Anchor("logout", "Log out");
@@ -29,4 +34,8 @@ public class UserSurveyView extends AppLayout {
 
         addToNavbar(header);
     }
+
+
+
+
 }

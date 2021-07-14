@@ -6,9 +6,9 @@ import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
-import com.vaadin.tutorial.crm.backend.repository.AnswerRepository;
 import com.vaadin.tutorial.crm.backend.service.AnswerService;
-import com.vaadin.tutorial.crm.ui.UserSurveyView;
+import com.vaadin.tutorial.crm.ui.view.user.UserSurveyView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +41,7 @@ public class Survey extends VerticalLayout {
 
 
     private void getAnswers(){
+
         ansrList.setItems(answerService.getAnswers(answerService));
     }
 
