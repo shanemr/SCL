@@ -61,3 +61,42 @@ a[highlight] {
     align-items: center;
     width: 50%;
  }
+
+
+/* User Home View */
+.user-home-view  {
+    display: flex;
+}
+
+.user-home-view, .results-grid {
+    flex: 2;
+}
+
+.user-home-view {
+    flex: 1;
+    padding: var(--lumo-space-m);
+}
+
+@media all and (max-width: 1100px) {
+    .user-home.editing, .results-grid,
+    .user-home.editing  {
+        display: none;
+    }
+}
+
+.userName{
+    align-self: center;
+}
+
+.surveyBtn{
+    align-self: center;
+}
+
+.prevBtn{
+    align-self: center;
+    background-color: crimson;
+    color: white;
+}
+
+/* Chart View */
+

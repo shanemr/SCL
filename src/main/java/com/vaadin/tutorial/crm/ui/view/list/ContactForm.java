@@ -65,12 +65,7 @@ public class ContactForm extends FormLayout {
     return new HorizontalLayout(save, delete, close); 
   }
 
-  /*private Component createButtonsLayout() {
-    // omitted
 
-
-    return new HorizontalLayout(save, delete, close);
-  }*/
 
   private void validateAndSave() {
     try {
