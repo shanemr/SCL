@@ -6,19 +6,20 @@ import com.vaadin.flow.component.charts.model.*;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 
-public class SclChart extends VerticalLayout {
+public class SclBarChart extends VerticalLayout {
 
 
-        public SclChart(){
+        public SclBarChart(){
             addClassName("scl-chart");
             add(getSurveyChart());
         }
 
     private Chart getSurveyChart() {
         Chart chart = new Chart(ChartType.COLUMN);
+        chart.setWidth("100%");
+        chart.setMinWidth("100%");
         Configuration configuration = chart.getConfiguration();
-        configuration.setTitle("SCL 07/16/2021");
-
+        configuration.setTitle("Most Recent SCL - 07/16/2021");
         configuration.addSeries(new ListSeries("Severity", 1, 1.5, 5, 4, 3, 5, 2, 2.5, 4.3));
 
 

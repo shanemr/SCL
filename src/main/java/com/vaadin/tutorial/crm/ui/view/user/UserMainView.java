@@ -15,7 +15,7 @@ public class UserMainView extends AppLayout {
     }
 
     private void createHeader() {
-        H1 logo = new H1("Symptom Checklist");
+        H1 logo = new H1("QEEG at JMA Symptom Checklist");
         logo.addClassName("logo");
 
         Anchor logout = new Anchor("logout", "Log out");

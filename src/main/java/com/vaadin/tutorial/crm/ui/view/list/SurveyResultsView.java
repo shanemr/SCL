@@ -11,15 +11,15 @@ import com.vaadin.tutorial.crm.backend.entity.Questionnaire;
 
 public class SurveyResultsView extends VerticalLayout {
 
-    Button allBtn = new Button("Compile results");
-    Button close = new Button("Close");
+    Button viewBtn = new Button("View Survey");
+    //Button close = new Button("Close");
     private Grid<Questionnaire> surGrid = new Grid(Questionnaire.class);
 
     public SurveyResultsView(){
         // Class name for survey results view
         addClassName("survey-results");
         configGrid();
-        add(surGrid, createButtonsLayout());
+        add(createButtonsLayout(), surGrid);
     }
 
     public void configGrid(){
@@ -43,22 +43,22 @@ public class SurveyResultsView extends VerticalLayout {
             addClassName("editing");
         }
 
-    public void closeSurveys() {
-        this.setVisible(false);
-        removeClassName("editing");
-    }
+//    public void closeSurveys() {
+//        this.setVisible(false);
+//        removeClassName("editing");
+//    }
 
     private HorizontalLayout createButtonsLayout() {
-        allBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        close.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-        close.addClickShortcut(Key.ESCAPE);
+        viewBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        //close.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        //close.addClickShortcut(Key.ESCAPE);
         //close.addClickListener(event -> fireEvent(new CloseEvent(this)));
 
-        close.addClickListener(event -> {
-            this.setVisible(false);
-        });
+//        close.addClickListener(event -> {
+//            this.setVisible(false);
+//        });
 
-        return new HorizontalLayout(allBtn, close);
+        return new HorizontalLayout(viewBtn);
     }
 
 
