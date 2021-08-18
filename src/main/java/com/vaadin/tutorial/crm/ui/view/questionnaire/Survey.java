@@ -41,7 +41,6 @@ public class Survey extends VerticalLayout {
 
 
     private void getAnswers(){
-
         ansrList.setItems(answerService.getAnswers(answerService));
     }
 

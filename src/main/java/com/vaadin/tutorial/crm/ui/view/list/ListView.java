@@ -14,13 +14,14 @@ import com.vaadin.tutorial.crm.backend.service.ContactService;
 import com.vaadin.tutorial.crm.ui.view.adim.MainLayout;
 
 @Route(value = "", layout = MainLayout.class)
-@PageTitle("Contacts | Vaadin CRM")
+@PageTitle("Patients | QEEG JMA")
 public class ListView extends VerticalLayout {
 
     private ContactService contactService;
     private Grid<Patient> grid = new Grid<>(Patient.class);
     private TextField filterText = new TextField();
     private ContactForm form;
+    private PatientData patientData;
 
 
     public ListView(ContactService contactService) {
@@ -34,24 +35,27 @@ public class ListView extends VerticalLayout {
         form.addListener(ContactForm.DeleteEvent.class, this::deleteContact);
         form.addListener(ContactForm.CloseEvent.class, e -> closeEditor());
 
+        patientData = new PatientData();
 
-        Div content = new Div(grid, form);
+
+        Div content = new Div(grid, form, patientData);
         content.addClassName("content");
         content.setSizeFull();
 
         add(getToolbar(), content);
         updateList();
         closeEditor();
+        closePatientSurvey();
     }
 
     private void configureGrid() {
         grid.addClassName("contact-grid");
         grid.setSizeFull();
-        grid.setColumns("firstName", "lastName", "email", "status");
+        grid.setColumns("firstName", "lastName", "email");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(event ->
-                editContact(event.getValue()));
+                patientSurvey(event.getValue()));
     }
 
     private HorizontalLayout getToolbar(){
@@ -67,6 +71,27 @@ public class ListView extends VerticalLayout {
         HorizontalLayout toolbar = new HorizontalLayout(filterText, addContactButton);
         toolbar.addClassName("toolbar");
         return toolbar;
+    }
+
+    public void patientSurvey(Patient patient) {
+        if (patient == null) {
+            closeEditor();
+        } else {
+            patientData.setPatient(patient);
+            patientData.setVisible(true);
+            addClassName("editing");
+        }
+    }
+
+    public void closePatientSurvey(){
+        patientData.setPatient(null);
+        patientData.setVisible(false);
+        removeClassName("editing");
+    }
+
+    void addPatient() {
+        grid.asSingleSelect().clear();
+        patientSurvey(new Patient());
     }
 
     public void editContact(Patient patient) {
@@ -101,6 +126,8 @@ public class ListView extends VerticalLayout {
         grid.asSingleSelect().clear();
         editContact(new Patient());
     }
+
+
 
     private void updateList() {
         grid.setItems(contactService.findAll(filterText.getValue()));

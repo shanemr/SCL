@@ -68,7 +68,6 @@ public class ContactService {
                                 Patient patient = new Patient();
                                 patient.setFirstName(split[0]);
                                 patient.setLastName(split[1]);
-                                patient.setStatus(Patient.Status.values()[r.nextInt(Patient.Status.values().length)]);
                                 String email = (patient.getFirstName() + "." + patient.getLastName() + "@" + "something" + ".com").toLowerCase();
                                 patient.setEmail(email);
                                 return patient;

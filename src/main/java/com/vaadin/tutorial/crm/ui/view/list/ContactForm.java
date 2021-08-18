@@ -5,10 +5,10 @@ import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
+import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
@@ -23,7 +23,7 @@ public class ContactForm extends FormLayout {
   TextField firstName = new TextField("First name");
   TextField lastName = new TextField("Last name");
   EmailField email = new EmailField("Email");
-  ComboBox<Patient.Status> status = new ComboBox<>("Status");
+  PasswordField password = new PasswordField("Password");
   Binder<Patient> binder = new BeanValidationBinder<>(Patient.class);
 
 
@@ -38,12 +38,11 @@ public class ContactForm extends FormLayout {
     // Matches fields in contact with contact form.
     binder.bindInstanceFields(this);
 
-    status.setItems(Patient.Status.values());
     addClassName("contact-form");
     add(firstName,
         lastName,
         email,
-        status,
+        password,
         createButtonsLayout()); 
   }
 

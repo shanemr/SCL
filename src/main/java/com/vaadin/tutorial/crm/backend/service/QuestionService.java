@@ -56,13 +56,16 @@ public class QuestionService {
         if (questionsRepository.count() == 0) {
             Random r = new Random(0);
             questionsRepository.saveAll(
-                    Stream.of("Gabrielle Patel", "Brian Robinson", "Eduardo Haugen",
-                            "Koen Johansen", "Alejandro Macdonald", "Angel Karlsson", "Yahir Gustavsson", "Haiden Svensson",
-                            "Emily Stewart", "Corinne Davis", "Ryann Davis", "Yurem Jackson", "Kelly Gustavsson",
-                            "Eileen Walker", "Katelyn Martin", "Israel Carlsson", "Quinn Hansson", "Makena Smith",
-                            "Danielle Watson", "Leland Harris", "Gunner Karlsen", "Jamar Olsson", "Lara Martin",
-                            "Ann Andersson", "Remington Andersson", "Rene Carlsson", "Elvis Olsen", "Solomon Olsen",
-                            "Jaydan Jackson", "Bernard Nilsen")
+                    Stream.of("I have cravings for alcohol or drugs", "I am easily distracted", "People usually have to repeat words to me",
+                            "I have blurred vision", "I have chronic pain", "I need to repeat acts and thoughts", "I have problems concentrating",
+                            "I have difficulty feeling things I touch", "I feel sad or blue", "I do not initiate actions", "I feel anxious",
+                            "I have problems sitting still", "I have problems recognizing emotional expressions", "I have low motivation",
+                            "I have migraine headaches", "I have problems multi-tasking", "I have recurrent thoughts about myself",
+                            "I often get stuck thinking about one thing", "I have problems with social skills", "I have problems recognizing things I touch",
+                            "I have low self esteem", "I have problems planning and sequencing", "I have short-term memory problems",
+                            "I have pain in many parts of my body", "I have problems finding the right word", "I feel fearful for no reason",
+                            "I drink to much alcohol", "I smoke too much(tobacco or other substance)", "I feel tense or on edge",
+                            "I have ringing in my ears")
                             .map(name -> {
                                 String[] split = name.split(" ");
                                 Questions question = new Questions();

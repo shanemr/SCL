@@ -10,8 +10,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.server.PWA;
 
 @CssImport("./styles/shared-styles.css")
-@PWA(name = "VaadinCRM",
-        shortName = "CRM",
+@PWA(name = "QEEG",
+        shortName = "JMA",
         offlineResources = {
         "C:\\Users\\sray\\Documents\\vaadin-crm\\src\\main\\webapp\\styles",
                 "./images/offline.png"})
