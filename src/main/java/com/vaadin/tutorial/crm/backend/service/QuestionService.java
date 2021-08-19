@@ -2,18 +2,21 @@ package com.vaadin.tutorial.crm.backend.service;
 
 import com.vaadin.tutorial.crm.backend.entity.Questions;
 import com.vaadin.tutorial.crm.backend.repository.QuestionsRepository;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
+@Service
 public class QuestionService {
     private static final Logger LOGGER = Logger.getLogger(ContactService.class.getName());
     private QuestionsRepository questionsRepository;
+    private List<String> questionsList = new ArrayList<>();
 
     public QuestionService(QuestionsRepository questionsRepository) {
         this.questionsRepository = questionsRepository;
@@ -21,6 +24,15 @@ public class QuestionService {
 
     public List<Questions> findAll() {
         return questionsRepository.findAll();
+    }
+
+    public List<String> getQuestions(QuestionService questionService){
+        // Clearing list of previous answers
+        questionsList.clear();
+        for( int i = 0; i < questionService.count(); i++) {
+            questionsList.add(questionService.findAll().get(i).getQuestion());
+        }
+        return questionsList;
     }
 
     public List<Questions> findAll(String stringFilter) {

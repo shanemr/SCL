@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
+
 public class AnswerService  {
     private static final Logger LOGGER = Logger.getLogger(AnswerService.class.getName());
     private AnswerRepository answerRepository;

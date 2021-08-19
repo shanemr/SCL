@@ -8,6 +8,7 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.ReadOnlyHasValue;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.tutorial.crm.backend.entity.Patient;
 import com.vaadin.tutorial.crm.ui.view.chart.SclBarChart;
@@ -16,9 +17,13 @@ import com.vaadin.tutorial.crm.ui.view.chart.SclPlotChart;
 public class PatientData extends VerticalLayout {
     // Patient information
     private Patient patient;
-    H1 name = new H1("");
+    // Displays currently selected patient's name
+    H1 nameHeader = new H1("");
     // Binds patient data to survey
     Binder<Patient> binder = new BeanValidationBinder<>(Patient.class);
+
+    ReadOnlyHasValue<String> name = new ReadOnlyHasValue<>(
+            text -> nameHeader.setText(text));
     // Bar chart of most recent survey
     private SclBarChart barChart = new SclBarChart();
     // Plot chart of all surveys
@@ -28,7 +33,8 @@ public class PatientData extends VerticalLayout {
 
     // Constructor
     public PatientData(){
-        add(name,configVert());
+        binder.forField(name).bind(Patient::getFullName, null);
+        add(nameHeader, configVert());
     }
 
     public static abstract class patientInfoEvent extends ComponentEvent<PatientData> {
@@ -54,7 +60,7 @@ public class PatientData extends VerticalLayout {
         closeChart.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         closeChart.addClickListener(event -> fireEvent(new CloseEvent(this)));
 
-
+        // Add layouts to view
         layout.add(closeChart,barChart, plotChart);
         return layout;
     }
@@ -67,6 +73,7 @@ public class PatientData extends VerticalLayout {
 
     public void setPatient(Patient patient){
         this.patient = patient;
+        binder.readBean(patient);
     }
 
     public Patient getPatient() {
@@ -74,11 +81,11 @@ public class PatientData extends VerticalLayout {
     }
 
     public H1 getName() {
-        return name;
+        return nameHeader;
     }
 
     public void setName(H1 name) {
-        this.name = name;
+        this.nameHeader = name;
     }
 
     public <T extends ComponentEvent<?>> Registration addListener(Class<T> eventType,

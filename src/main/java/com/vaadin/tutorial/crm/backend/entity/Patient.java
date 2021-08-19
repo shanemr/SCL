@@ -69,6 +69,10 @@ public class Patient extends AbstractEntity implements Cloneable {
         this.firstName = firstName;
     }
 
+    public String getFullName(){
+        return firstName + " " + lastName;
+    }
+
 
 
 

@@ -36,6 +36,7 @@ public class ListView extends VerticalLayout {
         form.addListener(ContactForm.CloseEvent.class, e -> closeEditor());
 
         patientData = new PatientData();
+        patientData.addListener(PatientData.CloseEvent.class, e -> closePatientSurvey());
 
 
         Div content = new Div(grid, form, patientData);
@@ -89,10 +90,7 @@ public class ListView extends VerticalLayout {
         removeClassName("editing");
     }
 
-    void addPatient() {
-        grid.asSingleSelect().clear();
-        patientSurvey(new Patient());
-    }
+
 
     public void editContact(Patient patient) {
         if (patient == null) {
