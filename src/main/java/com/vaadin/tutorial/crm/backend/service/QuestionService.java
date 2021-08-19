@@ -36,8 +36,6 @@ public class QuestionService {
     }
 
     public List<Questions> findAll(String stringFilter) {
-
-
         if (stringFilter == null || stringFilter.isEmpty()) {
             return questionsRepository.findAll();
         } else {
@@ -81,7 +79,7 @@ public class QuestionService {
                             .map(name -> {
                                 String[] split = name.split(" ");
                                 Questions question = new Questions();
-                                question.setQuestion(split[0]);
+                                question.setQuestion(split[8]);
                                 return question;
                             }).collect(Collectors.toList()));
         }

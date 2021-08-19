@@ -3,6 +3,7 @@ package com.vaadin.tutorial.crm.ui.view.questionnaire;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -35,6 +36,8 @@ public class Survey extends VerticalLayout {
     // Button to go to next question
     private Button nextBtn = new Button("Next");
 
+    // Question holder
+    H2 question = new H2();
 
     public Survey(AnswerService answerService, QuestionService questionService){
 
@@ -46,9 +49,9 @@ public class Survey extends VerticalLayout {
         surveyLayout.addClassName("survey_layout");
 
         nextBtn.addClassName("survey_btn_layout");
-        grid.setItems(questionList);
+        question.setText(questionList.get(8));
 
-        surveyLayout.add(grid,ansrList, nextBtn);
+        surveyLayout.add(question,ansrList, nextBtn);
         ansrList.clear();
         add(surveyLayout);
     }
