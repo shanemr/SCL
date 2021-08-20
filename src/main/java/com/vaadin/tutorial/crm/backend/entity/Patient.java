@@ -18,7 +18,6 @@ public class Patient extends AbstractEntity implements Cloneable {
     private String lastName = "";
 
     @NotNull
-
     private String password = "";
 
 
@@ -31,6 +30,10 @@ public class Patient extends AbstractEntity implements Cloneable {
     @OneToOne
     private Questionnaire questionnaire;
 
+    // Patient Role
+    private String role = "";
+    // Keep track if user is valid
+    private boolean enabled;
 
     @Email
     @NotNull
@@ -73,8 +76,21 @@ public class Patient extends AbstractEntity implements Cloneable {
         return firstName + " " + lastName;
     }
 
+    public String getRole() {
+        return role;
+    }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     @Override
     public String toString() {

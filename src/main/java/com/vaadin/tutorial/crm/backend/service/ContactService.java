@@ -70,6 +70,8 @@ public class ContactService {
                                 patient.setLastName(split[1]);
                                 String email = (patient.getFirstName() + "." + patient.getLastName() + "@" + "something" + ".com").toLowerCase();
                                 patient.setEmail(email);
+                                String password = "user";
+                                patient.setPassword(password);
                                 return patient;
                             }).collect(Collectors.toList()));
         }
