@@ -17,7 +17,6 @@ public class AnswerService  {
     private static final Logger LOGGER = Logger.getLogger(AnswerService.class.getName());
     private AnswerRepository answerRepository;
     private List<String> list = new ArrayList<>();
-    private List<Answers> realList = new ArrayList<>();
 
     public AnswerService(AnswerRepository answerRepository) {
         this.answerRepository = answerRepository;
@@ -37,14 +36,6 @@ public class AnswerService  {
         return list;
     }
 
-//    public List<Answers> getRealAnswers(AnswerService answerService){
-//        // Clearing list of previous answers
-//        realList.clear();
-//        for( int i = 0; i < answerService.count(); i++) {
-//            realList.add(answerService.findAll().get(i).getAnswer());
-//        }
-//        return realList;
-//    }
 
     public List<Answers> findAll(String stringFilter) {
         if (stringFilter == null || stringFilter.isEmpty()) {

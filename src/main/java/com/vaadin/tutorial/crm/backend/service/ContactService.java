@@ -78,7 +78,7 @@ public class ContactService {
                                 patient.setUserName(patient.getFirstName());
                                 String password = "user";
                                 patient.setPassword(password);
-                                patient.setRoles("USER");
+                                patient.setRoles("ROLE_USER");
                                 patient.setEnabled(true);
                                 return patient;
                             }).collect(Collectors.toList()));

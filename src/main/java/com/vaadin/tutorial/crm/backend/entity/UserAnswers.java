@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class UserAnswers extends AbstractEntity implements Cloneable {
     // Mapping answers to patient
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "answers_id", nullable = true)
     private Answers answers;
 

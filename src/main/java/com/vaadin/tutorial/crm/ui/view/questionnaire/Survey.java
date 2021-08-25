@@ -1,25 +1,25 @@
 package com.vaadin.tutorial.crm.ui.view.questionnaire;
 
-import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.listbox.ListBox;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
-import com.vaadin.tutorial.crm.backend.entity.*;
-import com.vaadin.tutorial.crm.backend.repository.QuestionsRepository;
+import com.vaadin.tutorial.crm.backend.entity.Patient;
+import com.vaadin.tutorial.crm.backend.entity.Questionnaire;
+import com.vaadin.tutorial.crm.backend.entity.UserAnswers;
 import com.vaadin.tutorial.crm.backend.service.*;
 import com.vaadin.tutorial.crm.security.PatientDetails;
-import com.vaadin.tutorial.crm.ui.view.list.ContactForm;
 import com.vaadin.tutorial.crm.ui.view.user.UserSurveyView;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 
 @Route(value = "scl", layout = UserSurveyView.class)
@@ -33,11 +33,11 @@ public class Survey extends VerticalLayout {
     private TextField filterText = new TextField();
     // Layout of survey
     private FormLayout surveyLayout = new FormLayout();
-    // Holds list of answers
-    private ListBox<Answers> ansrList = new ListBox<>();
-    // Displays list of answers
-    private ListBox<String> ansrToShow = new ListBox<>();
-    private List<String> list = new ArrayList<>();
+    // Holds list of answers to display
+    private ListBox<String> ansrList = new ListBox<>();
+    // Holds user selected answers
+    private List<String> answers = new LinkedList<>();
+
     // Holds list of questions
     private List<String> questionList = new ArrayList<>();
     // Grid to hold questions
@@ -54,7 +54,6 @@ public class Survey extends VerticalLayout {
     private Patient user;
     // Creating new survey
     Questionnaire survey = new Questionnaire();
-    Answers answers = new Answers();
 
     List<UserAnswers> userAnswer = new LinkedList<>();
 
@@ -62,6 +61,9 @@ public class Survey extends VerticalLayout {
 
     // Question holder
     H2 question = new H2();
+
+
+    String toGet = "";
 
     public Survey(AnswerService answerService, UserAnswerService userAnswerService, QuestionService questionService, QuestionnaireService questionnaireService, ContactService contactService){
         this.answerService = answerService;
@@ -74,34 +76,19 @@ public class Survey extends VerticalLayout {
         survey.setDate(date);
         questionnaireService.save(survey);
 
-       // answerService.save(answers);
-
-
-
 
          PatientDetails patient = getPatient();
          user = patient.getPatient();
-         System.out.println("PATIENT NAME " + getPatientInfo(user.getFirstName()));
-         answers.setPatient(getPatientInfo(user.getFirstName()));
+
 
         getAnswers();
-        //setAnswers();
         getQuestions();
         surveyLayout.addClassName("survey_layout");
 
         nextBtn.addClassName("survey_btn_layout");
         nextBtn.addClickListener(click -> nextQuestion());
 
-        ansrList.addValueChangeListener(event -> {
-            Notification.show("Listbox selection was changed to " + event.getValue());
-        });
 
-        /*userAnswer.add(new UserAnswers());
-        userAnswer.get(0).setAnswers(answerService.findAll().get(0));
-        userAnswer.get(0).setQuestionnaire(survey);
-        userAnswer.get(0).setPatient(user);
-        userAnswer.get(0).setQuestion(questionService.findAll().get(0));
-        userAnswerService.save(userAnswer.get(0));*/
 
 
         an.setAnswers(answerService.findAll().get(0));
@@ -119,32 +106,37 @@ public class Survey extends VerticalLayout {
     }
 
 
-    private void getAnswers(){ ansrList.setItems(answerService.findAll());
+    private void getAnswers(){ ansrList.setItems(answerService.getAnswers(answerService));
     }
 
     private void getQuestions(){
         questionList.addAll(questionService.getQuestions(questionService));
     }
 
+    // Moves on to the next question
     private void nextQuestion(){
-        question.setText(questionList.get(count++));
+        // Set next question value
+        question.setText(questionList.get(++count));
+        //Add selected answer to list
+        addAnswer();
     }
 
+    // Adds selected answer to list of answers
+    private void addAnswer(){
+
+        ansrList.addValueChangeListener(event -> {
+            toGet = event.getValue();
+            System.out.println(toGet);
+        });
+
+        answers.add(toGet);
+        System.out.println(answers);
+    }
     private Patient getPatientInfo(String patient){
         return contactService.findPatient(patient);
     }
 
 
-
-
-
-    /*private Answers getAnswer(){
-        Answers selectedAnswer = new Answers();
-      selectedAnswer = ansrList.addValueChangeListener(event -> {
-            event.getValue();
-        });
-        return selectedAnswer;
-    }*/
 
     private void saveQuestionnaire(){
 
