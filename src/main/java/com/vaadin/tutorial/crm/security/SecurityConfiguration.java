@@ -1,6 +1,7 @@
 package com.vaadin.tutorial.crm.security;
 
 import com.vaadin.tutorial.crm.backend.service.PatientDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -9,8 +10,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 
 @EnableWebSecurity
@@ -54,18 +60,35 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/h2-console/**");
     }
 
+    /*@Bean
+    @Override
+    public UserDetailsService userDetailsService() {
+        UserDetails normalUser =
+                User.withUsername("user")
+                        .password("{noop}password")
+                        .roles("User")
+                        .build();
+
+        // admin user with all privileges
+        UserDetails adminUser =
+                User.withUsername("admin")
+                        .password("{noop}password")
+                        .roles("User", "Admin")
+                        .build();
+
+        return new InMemoryUserDetailsManager(normalUser, adminUser);
+    }
+*/
+
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-        return new  PatientDetailService()  ;
+        return new PatientDetailService();
     }
 
-   /* @Bean
-    public UserDetailsService userDetailsService() {
-        return new PatientDetailService();
-    }*/
 
     @Bean
+    @Autowired
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -83,6 +106,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
-
 
 }

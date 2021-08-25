@@ -7,7 +7,9 @@ import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
+
 
 @CssImport("./styles/shared-styles.css")
 @PWA(name = "QEEG",

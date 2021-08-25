@@ -1,6 +1,5 @@
 package com.vaadin.tutorial.crm.ui.view.list;
 
-import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
@@ -11,7 +10,7 @@ import com.vaadin.tutorial.crm.backend.entity.Questionnaire;
 
 public class SurveyResultsView extends VerticalLayout {
 
-    Button viewBtn = new Button("View Survey");
+    Button viewBtn = new Button("View Questionaire");
     //Button close = new Button("Close");
     private Grid<Questionnaire> surGrid = new Grid(Questionnaire.class);
 

@@ -36,7 +36,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        <!-- Repository used for questionnaire -->
+        <!-- Repository used for questionaire -->
         <repository>
             <id>vaadin-addons</id>
             <url>https://maven.vaadin.com/vaadin-addons</url>
@@ -164,12 +164,16 @@
             <artifactId>spring-security-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
         </dependency>
         <dependency>
             <groupId>org.vaadin.addons</groupId>
-            <artifactId>questionnaire</artifactId>
+            <artifactId>questionaire</artifactId>
             <version>0.1.1</version>
         </dependency>
         <dependency>

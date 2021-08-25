@@ -34,6 +34,11 @@ public class ContactService {
         }
     }
 
+    public Patient findPatient(String patient){
+        return contactRepository.searchPatient(patient);
+    }
+
+
     public long count() {
         return contactRepository.count();
     }
@@ -56,7 +61,7 @@ public class ContactService {
         if (contactRepository.count() == 0) {
             Random r = new Random(0);
             contactRepository.saveAll(
-                    Stream.of("Gabrielle Patel", "Brian Robinson", "Eduardo Haugen",
+                    Stream.of("user user", "Gabrielle Patel", "Brian Robinson", "Eduardo Haugen",
                             "Koen Johansen", "Alejandro Macdonald", "Angel Karlsson", "Yahir Gustavsson", "Haiden Svensson",
                             "Emily Stewart", "Corinne Davis", "Ryann Davis", "Yurem Jackson", "Kelly Gustavsson",
                             "Eileen Walker", "Katelyn Martin", "Israel Carlsson", "Quinn Hansson", "Makena Smith",
@@ -70,8 +75,11 @@ public class ContactService {
                                 patient.setLastName(split[1]);
                                 String email = (patient.getFirstName() + "." + patient.getLastName() + "@" + "something" + ".com").toLowerCase();
                                 patient.setEmail(email);
+                                patient.setUserName(patient.getFirstName());
                                 String password = "user";
                                 patient.setPassword(password);
+                                patient.setRoles("USER");
+                                patient.setEnabled(true);
                                 return patient;
                             }).collect(Collectors.toList()));
         }

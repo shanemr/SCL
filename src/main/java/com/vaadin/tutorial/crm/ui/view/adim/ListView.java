@@ -1,4 +1,4 @@
-package com.vaadin.tutorial.crm.ui.view.list;
+package com.vaadin.tutorial.crm.ui.view.adim;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -12,8 +12,14 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.tutorial.crm.backend.entity.Patient;
 import com.vaadin.tutorial.crm.backend.service.ContactService;
 import com.vaadin.tutorial.crm.ui.view.adim.MainLayout;
+import com.vaadin.tutorial.crm.ui.view.list.ContactForm;
+import com.vaadin.tutorial.crm.ui.view.list.PatientData;
+import com.vaadin.tutorial.crm.ui.view.login.LoginView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 
 @Route(value = "", layout = MainLayout.class)
+@Secured("ROLE_ADMIN")
 @PageTitle("Patients | QEEG JMA")
 public class ListView extends VerticalLayout {
 
@@ -23,7 +29,7 @@ public class ListView extends VerticalLayout {
     private ContactForm form;
     private PatientData patientData;
 
-
+    @Autowired
     public ListView(ContactService contactService) {
         this.contactService = contactService;
         addClassName("list-view");

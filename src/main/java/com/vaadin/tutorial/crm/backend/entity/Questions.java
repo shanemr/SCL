@@ -7,8 +7,8 @@ import java.util.List;
 @Entity
 public class Questions extends AbstractEntity implements Cloneable{
 
-    private String question = "";
 
+    private String question = "";
 
 
     // Maps questions to questionnaire.
@@ -16,9 +16,9 @@ public class Questions extends AbstractEntity implements Cloneable{
     @JoinColumn(name = "questionnaire_id")
     private Questionnaire questionnaire;
 
-    // Map possible question answers to question.
-    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
-    private List<Answers> answers = new LinkedList<>();
+    // Maps answers to question.
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
+    private List<UserAnswers> userAnswers;
 
     public Questionnaire getQuestionnaire() {
         return questionnaire;
@@ -28,12 +28,12 @@ public class Questions extends AbstractEntity implements Cloneable{
         this.questionnaire = questionnaire;
     }
 
-    public List<Answers> getQuestionnaireAnswers() {
-        return answers;
+    public List<UserAnswers> getUserAnswers() {
+        return userAnswers;
     }
 
-    public void setQuestionnaireAnswers(List<Answers> answers) {
-        this.answers = answers;
+    public void setUserAnswers(List<UserAnswers> userAnswers) {
+        this.userAnswers = userAnswers;
     }
 
     public String getQuestion() {

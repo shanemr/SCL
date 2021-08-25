@@ -2,6 +2,7 @@ package com.vaadin.tutorial.crm.backend.entity;
 
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,31 +12,21 @@ public class Questionnaire extends AbstractEntity implements Cloneable{
         @GeneratedValue(strategy = GenerationType.AUTO)
         private long id;
 
-        private String date ="07/15/2021";
+        private Date date;
 
-
-        // Mapping questionnaire to questions
-        @OneToMany(mappedBy = "questionnaire", fetch = FetchType.EAGER)
-        private List<Questions> questions = new LinkedList<>();
+        @OneToOne(mappedBy = "questionnaire")
+        private UserAnswers userAnswers;
 
         public Questionnaire(){
 
         }
 
-        public List<Questions> getQuestions() {
-                return questions;
-        }
 
-        public void setQuestions(List<Questions> questions) {
-                this.questions = questions;
-        }
-
-
-        public String getDate() {
+        public Date getDate() {
                 return date;
         }
 
-        public void setDate(String date) {
+        public void setDate(Date date) {
                 this.date = date;
         }
 }

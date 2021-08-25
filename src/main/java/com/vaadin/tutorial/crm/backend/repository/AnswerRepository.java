@@ -14,4 +14,5 @@ public interface AnswerRepository extends JpaRepository<Answers, Long> {
     @Query("select c from Answers c " +
             "where lower(c.answer) like lower(concat('%', :searchTerm, '%')) ")
     List<Answers> search(@Param("searchTerm") String searchTerm);
+    Answers save(@Param("searchTerm") String searchTerm);
 }
