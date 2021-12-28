@@ -74,7 +74,9 @@ public class Survey extends VerticalLayout {
 
         // Set the date of the survey
         survey.setDate(date);
-        questionnaireService.save(survey);
+
+        // Change to save survey at the end
+        //questionnaireService.save(survey);
 
 
          PatientDetails patient = getPatient();
@@ -87,12 +89,13 @@ public class Survey extends VerticalLayout {
 
         nextBtn.addClassName("survey_btn_layout");
         nextBtn.addClickListener(click -> nextQuestion());
+        saveBtn.addClickListener(click -> saveQuestionnaire());
 
 
 
 
         an.setAnswers(answerService.findAll().get(0));
-        an.setQuestionnaire(survey);
+        //an.setQuestionnaire(survey);
         an.setPatient(user);
         an.setQuestion(questionService.findAll().get(0));
         userAnswerService.save(an);
@@ -139,7 +142,8 @@ public class Survey extends VerticalLayout {
 
 
     private void saveQuestionnaire(){
-
+        questionnaireService.save(survey);
+        an.setQuestionnaire(survey);
     }
 
     private PatientDetails getPatient(){

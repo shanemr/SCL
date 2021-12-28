@@ -11,14 +11,12 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.tutorial.crm.backend.entity.Patient;
 import com.vaadin.tutorial.crm.backend.service.ContactService;
-import com.vaadin.tutorial.crm.ui.view.adim.MainLayout;
 import com.vaadin.tutorial.crm.ui.view.list.ContactForm;
 import com.vaadin.tutorial.crm.ui.view.list.PatientData;
-import com.vaadin.tutorial.crm.ui.view.login.LoginView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 
-@Route(value = "", layout = MainLayout.class)
+@Route(value = "admin", layout = MainLayout.class)
 @Secured("ROLE_ADMIN")
 @PageTitle("Patients | QEEG JMA")
 public class ListView extends VerticalLayout {

@@ -1,12 +1,8 @@
 package com.vaadin.tutorial.crm.ui.view.user;
 
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.charts.model.Navigator;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -24,7 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class UserHomeView extends HorizontalLayout {
 
         H1 userName = new H1();
-        Button takeSurvey = new Button("Take Questionaire");
+        Button takeSurvey = new Button("Take Questionnaire");
         // Creating bar chart object
         SclBarChart chart = new SclBarChart();
         // Creating plot chart
@@ -35,8 +31,6 @@ public class UserHomeView extends HorizontalLayout {
 
 
     public UserHomeView(){
-
-
 
         // Classname for user home view
         addClassName("user-home-view");
