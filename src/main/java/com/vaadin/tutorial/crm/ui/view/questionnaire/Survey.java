@@ -50,7 +50,7 @@ public class Survey extends VerticalLayout {
     private int count = 0;
     // New Date for survey
     private Date date = new Date();
-    // Hods patient information
+    // Holds patient information
     private Patient user;
     // Creating new survey
     Questionnaire survey = new Questionnaire();
@@ -103,7 +103,14 @@ public class Survey extends VerticalLayout {
 
         question.setText(questionList.get(count));
 
-        surveyLayout.add(question,ansrList, nextBtn, saveBtn);
+        surveyLayout.add(question,ansrList, nextBtn);
+        System.out.print("count is " + count);
+        System.out.print("question list size is " + questionList.size());
+        if(count == questionList.size() - 1){
+            System.out.println("inside if");
+            surveyLayout.addFormItem(saveBtn, "button");
+            surveyLayout.add(saveBtn);
+        }
         ansrList.clear();
         add(surveyLayout);
     }
@@ -119,9 +126,12 @@ public class Survey extends VerticalLayout {
     // Moves on to the next question
     private void nextQuestion(){
         // Set next question value
-        question.setText(questionList.get(++count));
-        //Add selected answer to list
-        addAnswer();
+        if(count != questionList.size() - 1){
+            question.setText(questionList.get(++count));
+            //Add selected answer to list
+            addAnswer();
+        }
+
     }
 
     // Adds selected answer to list of answers
