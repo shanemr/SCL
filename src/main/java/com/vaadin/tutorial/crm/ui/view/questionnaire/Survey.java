@@ -55,6 +55,7 @@ public class Survey extends VerticalLayout {
     // Creating new survey
     Questionnaire survey = new Questionnaire();
 
+    // List to hold user answers
     List<UserAnswers> userAnswer = new LinkedList<>();
 
     UserAnswers an = new UserAnswers();
@@ -75,42 +76,41 @@ public class Survey extends VerticalLayout {
         // Set the date of the survey
         survey.setDate(date);
 
-        // Change to save survey at the end
-        //questionnaireService.save(survey);
 
-
+        // Getting patient currently logged in
          PatientDetails patient = getPatient();
+         // Setting the patient to currently logged in patient
          user = patient.getPatient();
 
-
+        // Getting questionnaire answers
         getAnswers();
+        // Getting question for questionnaire
         getQuestions();
         surveyLayout.addClassName("survey_layout");
 
+        // Adding class name to next button
         nextBtn.addClassName("survey_btn_layout");
+        // Calling function to get next question
         nextBtn.addClickListener(click -> nextQuestion());
+        // Calling function to save questionnaire
         saveBtn.addClickListener(click -> saveQuestionnaire());
 
 
 
 
         an.setAnswers(answerService.findAll().get(0));
-        //an.setQuestionnaire(survey);
         an.setPatient(user);
         an.setQuestion(questionService.findAll().get(0));
         userAnswerService.save(an);
 
 
         question.setText(questionList.get(count));
-
+        surveyLayout.setResponsiveSteps(
+                new FormLayout.ResponsiveStep("0", 1)
+        );
+        surveyLayout.setColspan(question, 4);
         surveyLayout.add(question,ansrList, nextBtn);
-        System.out.print("count is " + count);
-        System.out.print("question list size is " + questionList.size());
-        if(count == questionList.size() - 1){
-            System.out.println("inside if");
-            surveyLayout.addFormItem(saveBtn, "button");
-            surveyLayout.add(saveBtn);
-        }
+
         ansrList.clear();
         add(surveyLayout);
     }
@@ -125,6 +125,13 @@ public class Survey extends VerticalLayout {
 
     // Moves on to the next question
     private void nextQuestion(){
+        // Display finish button
+        if(count == questionList.size() - 2){
+            System.out.println("inside if");
+            nextBtn.removeClassName("survey_btn_layout");
+            nextBtn.addClassName("btn_hide");
+            surveyLayout.add(saveBtn);
+        }
         // Set next question value
         if(count != questionList.size() - 1){
             question.setText(questionList.get(++count));

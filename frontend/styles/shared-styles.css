@@ -46,7 +46,8 @@
 }
 
 .surveyBtn{
-    align-self: center;
+    alignment: left;
+    max-width: 100px;
     background-color: crimson;
     color: white;
 }
@@ -91,12 +92,26 @@ a[highlight] {
 
 /* Survey view */
 
- .survey_layout, .survey_btn_layout{
+ .survey_layout{
     align-self: center;
+     width: 30%;
 
  }
 
+.survey_btn_layout{
+    align-self: center;
+    max-width: 100%;
+}
 
+.survey_btn_layout:hover{
+    background-color: aqua;
+}
+
+.btn_hide{
+    visibility: hidden;
+    display: none;
+    background-color: green;
+}
 
  .survey_grid{
     align-items: center;
