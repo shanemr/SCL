@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,4 +14,8 @@ public interface AnswerRepository extends JpaRepository<Answers, Long> {
             "where lower(c.answer) like lower(concat('%', :searchTerm, '%')) ")
     List<Answers> search(@Param("searchTerm") String searchTerm);
     Answers save(@Param("searchTerm") String searchTerm);
+
+    @Query("SELECT c.answerVal From Answers c WHERE c.answer = :answer")
+    int getAnswerVal(@Param("answer") String answer);
+
 }

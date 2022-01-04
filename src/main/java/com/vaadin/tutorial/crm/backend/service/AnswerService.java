@@ -26,6 +26,10 @@ public class AnswerService  {
         return answerRepository.findAll();
     }
 
+    public int getAnswerVal(String answer){
+        return answerRepository.getAnswerVal(answer);
+    }
+
 
     public List<String> getAnswers(AnswerService answerService){
         // Clearing list of previous answers

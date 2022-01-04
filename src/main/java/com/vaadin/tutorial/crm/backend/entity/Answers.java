@@ -14,6 +14,9 @@ public class Answers extends AbstractEntity implements Cloneable{
     @NotNull
     private String answer = "";
 
+    @NotNull
+    private int answerVal;
+
 
     @OneToMany(mappedBy = "answers", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
@@ -37,4 +40,13 @@ public class Answers extends AbstractEntity implements Cloneable{
     public void setUserAnswers(List<UserAnswers> userAnswers) {
         this.userAnswers = userAnswers;
     }
+
+    public void setAnswerVal(int answerVal){
+        this.answerVal = answerVal;
+    }
+   public int getAnswerVal(){
+        return answerVal;
+   }
+
+
 }
