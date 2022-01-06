@@ -1,9 +1,6 @@
 package com.vaadin.tutorial.crm.backend.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import java.util.List;
 
 @Entity
 public class Questions extends AbstractEntity implements Cloneable{
@@ -14,17 +11,17 @@ public class Questions extends AbstractEntity implements Cloneable{
 
 
     // Maps answers to question.
-    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
-    private List<UserAnswers> userAnswers;
+    /*@OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
+    private List<UserAnswers> userAnswers;*/
 
 
-    public List<UserAnswers> getUserAnswers() {
+    /*public List<UserAnswers> getUserAnswers() {
         return userAnswers;
     }
 
     public void setUserAnswers(List<UserAnswers> userAnswers) {
         this.userAnswers = userAnswers;
-    }
+    }*/
 
     public String getQuestion() {
         return question;

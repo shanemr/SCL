@@ -1,8 +1,10 @@
 package com.vaadin.tutorial.crm.backend.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity
 public class Answers extends AbstractEntity implements Cloneable{
@@ -18,10 +20,10 @@ public class Answers extends AbstractEntity implements Cloneable{
     private int answerVal;
 
 
-    @OneToMany(mappedBy = "answers", fetch = FetchType.LAZY,
+    /*@OneToMany(mappedBy = "answers", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private List<UserAnswers> userAnswers;
+    private List<UserAnswers> userAnswers;*/
 
 
 
@@ -33,13 +35,13 @@ public class Answers extends AbstractEntity implements Cloneable{
         this.answer = answer;
     }
 
-    public List<UserAnswers> getUserAnswers() {
+    /*public List<UserAnswers> getUserAnswers() {
         return userAnswers;
     }
 
     public void setUserAnswers(List<UserAnswers> userAnswers) {
         this.userAnswers = userAnswers;
-    }
+    }*/
 
     public void setAnswerVal(int answerVal){
         this.answerVal = answerVal;

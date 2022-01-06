@@ -105,7 +105,14 @@ a[highlight] {
 
 .survey_btn_layout:hover{
     background-color: aqua;
+
 }
+
+.save_button{
+    background-color: crimson;
+    color: white;
+}
+
 
 .btn_hide{
     visibility: hidden;

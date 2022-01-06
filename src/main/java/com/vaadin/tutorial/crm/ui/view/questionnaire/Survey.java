@@ -38,6 +38,8 @@ public class Survey extends VerticalLayout {
     // Holds user selected answers
     private List<String> answers = new LinkedList<>();
 
+    // pop up
+    private Pop popup = new Pop();
     // Holds list of questions
     private List<String> questionList = new ArrayList<>();
     // Grid to hold questions
@@ -55,7 +57,7 @@ public class Survey extends VerticalLayout {
     // Creating new survey
     Questionnaire survey = new Questionnaire();
     // New UseAnswer entry
-    UserAnswers an = new UserAnswers();
+    UserAnswers userAn = new UserAnswers();
 
     // Question holder
     H2 question = new H2();
@@ -73,7 +75,6 @@ public class Survey extends VerticalLayout {
         // Set the date of the survey
         survey.setDate(date);
 
-
         // Getting patient currently logged in
          PatientDetails patient = getPatient();
          // Setting the patient to currently logged in patient
@@ -87,25 +88,21 @@ public class Survey extends VerticalLayout {
 
         // Adding class name to next button
         nextBtn.addClassName("survey_btn_layout");
+        // Adding class name to save button
+        saveBtn.addClassName("save_button");
         // Prime listener for first selection
         if(answers.isEmpty()){
-            System.out.println("inside empty");
             addAnswer();
+            // Remove empty primer from front of list
+            answers.remove(0);
         }
         // Calling function to get next question
         nextBtn.addClickListener(click -> nextQuestion());
         // Calling function to save questionnaire
         saveBtn.addClickListener(click -> saveQuestionnaire());
 
-
-
-        // Getting answers to select from
-        //an.setAnswers(answerService.findAll().get(0));
-        //an.setQuestionnaire(survey);
         // Setting patient
-        an.setPatient(user);
-        an.setQuestion(questionService.findAll().get(0));
-        userAnswerService.save(an);
+        userAn.setPatient(user);
 
         // Setting current question
         question.setText(questionList.get(count));
@@ -133,41 +130,59 @@ public class Survey extends VerticalLayout {
     private void nextQuestion(){
         // Display finish button
         if(count == questionList.size() - 2){
-            System.out.println("inside if");
             nextBtn.removeClassName("survey_btn_layout");
             nextBtn.addClassName("btn_hide");
             surveyLayout.add(saveBtn);
         }
         // Set next question value
         if(count != questionList.size() - 1){
-            question.setText(questionList.get(++count));
+
+            if(addAnswer()){
+                popup.setB(false);
+                question.setText(questionList.get(++count));
+             } else{
+                popup.setB(true);
+                popup.getPopupContent();
+            }
             //Add selected answer to list
-            addAnswer();
+            //addAnswer();
             ansrList.clear();
         }
 
     }
 
     // Adds selected answer to list of answers
-    private void addAnswer(){
+    private boolean addAnswer(){
         ansrList.addValueChangeListener(event -> {
             selectedAnswer = event.getValue();
-            System.out.println("Value of selected answer is " + answerService.getAnswerVal(selectedAnswer));
+            //System.out.println("Value of selected answer is " + answerService.getAnswerVal(selectedAnswer));
             System.out.println("Value changed to " + selectedAnswer);
         });
-
-        answers.add(selectedAnswer);
-        System.out.println(answers);
-    }
-    private Patient getPatientInfo(String patient){
-        return contactService.findPatient(patient);
+        if(answers.isEmpty()){
+            System.out.println("list is empty");
+            answers.add(0, selectedAnswer);
+        } else{
+            if(selectedAnswer != null){
+                System.out.println("Selected answer is " + selectedAnswer);
+                answers.add(selectedAnswer);
+                System.out.println(answers);
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
     }
 
 
 
     private void saveQuestionnaire(){
         System.out.println(survey.getDate());
+        addAnswer();
+        saveAnswers(answers);
         questionnaireService.save(survey);
+        userAnswerService.save(userAn);
 
     }
 
@@ -176,39 +191,39 @@ public class Survey extends VerticalLayout {
         return (PatientDetails) patient;
     }
 
-
-    private void addAnswers(LinkedList<UserAnswers> l){
-        an.setAnswerOne(5);
-        an.setAnswerTwo(5);
-        an.setAnswerThree(5);
-        an.setAnswerFour(5);
-        an.setAnswerFive(5);
-        an.setAnswerSix(5);
-        an.setAnswerSeven(5);
-        an.setAnswerEight(5);
-        an.setAnswerNine(5);
-        an.setAnswerTen(5);
-        an.setAnswerEleven(5);
-        an.setAnswerTwelve(5);
-        an.setAnswerThirteen(5);
-        an.setAnswerFourteen(5);
-        an.setAnswerFifteen(5);
-        an.setAnswerSixteen(5);
-        an.setAnswerSeventeen(5);
-        an.setAnswerEighteen(5);
-        an.setAnswerNineteen(5);
-        an.setAnswerTwenty(5);
-        an.setAnswerTwentyOne(5);
-        an.setAnswerTwentyTwo(5);
-        an.setAnswerTwentyThree(5);
-        an.setAnswerTwentyFour(5);
-        an.setAnswerTwentyFive(5);
-        an.setAnswerTwentySix(5);
-        an.setAnswerTwentySeven(5);
-        an.setAnswerTwentyEight(5);
-        an.setAnswerTwentyNine(5);
-        an.setAnswerThirty(5);
-        an.setAnswerThirtyOne(5);
+    // Sets all of user selected answers
+    private void saveAnswers(List<String> l){
+        userAn.setAnswerOne(answerService.getAnswerVal(l.get(0)));
+        userAn.setAnswerTwo(answerService.getAnswerVal(l.get(1)));
+        userAn.setAnswerThree(answerService.getAnswerVal(l.get(2)));
+        userAn.setAnswerFour(answerService.getAnswerVal(l.get(3)));
+        userAn.setAnswerFive(answerService.getAnswerVal(l.get(4)));
+        userAn.setAnswerSix(answerService.getAnswerVal(l.get(5)));
+        userAn.setAnswerSeven(answerService.getAnswerVal(l.get(6)));
+        userAn.setAnswerEight(answerService.getAnswerVal(l.get(7)));
+        userAn.setAnswerNine(answerService.getAnswerVal(l.get(8)));
+        userAn.setAnswerTen(answerService.getAnswerVal(l.get(9)));
+        userAn.setAnswerEleven(answerService.getAnswerVal(l.get(10)));
+        userAn.setAnswerTwelve(answerService.getAnswerVal(l.get(11)));
+        userAn.setAnswerThirteen(answerService.getAnswerVal(l.get(12)));
+        userAn.setAnswerFourteen(answerService.getAnswerVal(l.get(13)));
+        userAn.setAnswerFifteen(answerService.getAnswerVal(l.get(14)));
+        userAn.setAnswerSixteen(answerService.getAnswerVal(l.get(15)));
+        userAn.setAnswerSeventeen(answerService.getAnswerVal(l.get(16)));
+        userAn.setAnswerEighteen(answerService.getAnswerVal(l.get(17)));
+        userAn.setAnswerNineteen(answerService.getAnswerVal(l.get(18)));
+        userAn.setAnswerTwenty(answerService.getAnswerVal(l.get(19)));
+        userAn.setAnswerTwentyOne(answerService.getAnswerVal(l.get(20)));
+        userAn.setAnswerTwentyTwo(answerService.getAnswerVal(l.get(21)));
+        userAn.setAnswerTwentyThree(answerService.getAnswerVal(l.get(22)));
+        userAn.setAnswerTwentyFour(answerService.getAnswerVal(l.get(23)));
+        userAn.setAnswerTwentyFive(answerService.getAnswerVal(l.get(24)));
+        userAn.setAnswerTwentySix(answerService.getAnswerVal(l.get(25)));
+        userAn.setAnswerTwentySeven(answerService.getAnswerVal(l.get(26)));
+        userAn.setAnswerTwentyEight(answerService.getAnswerVal(l.get(27)));
+        userAn.setAnswerTwentyNine(answerService.getAnswerVal(l.get(28)));
+        userAn.setAnswerThirty(answerService.getAnswerVal(l.get(29)));
+        userAn.setAnswerThirtyOne(answerService.getAnswerVal(l.get(30)));
     }
 
 
